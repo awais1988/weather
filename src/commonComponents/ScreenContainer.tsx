@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { ImageBackground, ScrollView, StyleSheet, View } from "react-native";
 import Colors from "../constants/ColorConst";
 import { weatherBG } from "../assests/images";
 import Header from "./Header";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 interface ScreenContainerProps {
   headerLabel?: string;
@@ -26,7 +21,7 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
   children,
 }) => {
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaProvider style={styles.safeArea}>
       <ImageBackground
         source={weatherBG}
         style={styles.image}
@@ -42,7 +37,7 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
           <View style={{ flex: 1 }}>{children}</View>
         </ScrollView>
       </ImageBackground>
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

@@ -3,13 +3,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   FlatList,
   Pressable,
-  SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   View,
-  useWindowDimensions,
 } from "react-native";
 import { RootStackParamList } from "../appNavigator";
 import Header from "../commonComponents/Header";
@@ -20,6 +17,7 @@ import Spinner from "../commonComponents/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import { locationActions } from "../store/location/locationActions";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 type AddCityScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -73,7 +71,7 @@ const AddCity: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaProvider style={styles.safeArea}>
       {loading ? (
         <Spinner />
       ) : (
@@ -116,7 +114,7 @@ const AddCity: React.FC<Props> = ({ navigation }) => {
           </View>
         </>
       )}
-    </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 

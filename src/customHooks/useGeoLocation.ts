@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import Geolocation from '@react-native-community/geolocation';
-import {Alert} from 'react-native';
+import { useState } from "react";
+import Geolocation from "@react-native-community/geolocation";
+import { Alert } from "react-native";
 
 interface Coordinates {
   latitude: number;
@@ -12,16 +12,15 @@ const useGeoLocation = () => {
 
   const getCurrentPosition = () => {
     Geolocation.getCurrentPosition(
-      pos => {
-        const {latitude, longitude} = pos.coords;
-        setCoords({latitude, longitude});
+      (pos) => {
+        const { latitude, longitude } = pos.coords;
+        setCoords({ latitude, longitude });
       },
-      error => Alert.alert('GetCurrentPosition Error', JSON.stringify(error)),
-      {enableHighAccuracy: true},
+      (error) => Alert.alert("GetCurrentPosition Error", JSON.stringify(error))
     );
   };
 
-  return {getCurrentPosition, coords};
+  return { getCurrentPosition, coords };
 };
 
 export default useGeoLocation;

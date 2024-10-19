@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Pressable, Text } from "react-native";
+import { View, StyleSheet, Pressable, Text, Platform } from "react-native";
 import Colors from "../constants/ColorConst";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     flexDirection: "row",
+    marginTop: Platform.OS === "ios" ? 50 : 0,
   },
   labelStyle: {
     fontSize: 20,

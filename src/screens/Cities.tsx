@@ -14,6 +14,7 @@ import {
 } from "../store/location/locationReducer";
 import { cityTypes } from "../../types";
 import Icon from "react-native-vector-icons/AntDesign";
+import useResetStack from "../customHooks/useResetStack";
 
 type CitiesScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -26,12 +27,13 @@ type Props = {
 
 const Cities: React.FC<Props> = ({ navigation }) => {
   const dispatch: AppDispatch = useDispatch();
+  const { resetStack } = useResetStack();
   const [deleteMood, setDeleteMood] = useState<boolean>(false);
   const { locationArray } = useSelector((state: RootState) => state.location);
 
   const onLocationSelection = (item: cityTypes) => {
     dispatch(selectLocation(item));
-    navigation.navigate("Home");
+    resetStack("Home");
   };
   const onDeleteItem = (item: cityTypes) => {
     dispatch(removeLocation(item));

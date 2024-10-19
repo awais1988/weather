@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Button, StyleSheet, Alert } from "react-native";
+import { View, Text, Button, StyleSheet, Alert, Pressable } from "react-native";
 import ScreenContainer from "../commonComponents/ScreenContainer";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../appNavigator";
-import Geolocation from "@react-native-community/geolocation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
-import { latLngTypes } from "../../types";
 import { locationActions } from "../store/location/locationActions";
-import { weatherActions } from "../store/weather/weatherActions";
 import useGeoLocation from "../customHooks/useGeoLocation";
 import Colors from "../constants/ColorConst";
 import Spinner from "../commonComponents/Spinner";
@@ -25,11 +22,7 @@ type Props = {
 const GetStarted: React.FC<Props> = ({ navigation }) => {
   const dispatch: AppDispatch = useDispatch();
   const { getCurrentPosition, coords } = useGeoLocation();
-  const { weatherData } = useSelector((state: RootState) => state.weather);
-  const { locationArray, loading } = useSelector(
-    (state: RootState) => state.location
-  );
-  const [position, setPosition] = useState<string | null>(null);
+  const { loading } = useSelector((state: RootState) => state.location);
 
   useEffect(() => {
     if (coords) {
@@ -50,13 +43,32 @@ const GetStarted: React.FC<Props> = ({ navigation }) => {
         <Spinner />
       ) : (
         <View style={styles.container}>
-          <Text style={styles.welcomeText}>Welcome Get Started</Text>
+          <View>
+            <Text style={styles.welcomeText}>Welcome To Weather App</Text>
+          </View>
           <View>
             <Text style={styles.title}>
-              <Text>Current position: </Text>
-              {position}
+              Let’s get started and please allow Geo Location to get Weather
+              Update.
             </Text>
-            <Button title="Get Current Position" onPress={getCurrentPosition} />
+          </View>
+
+          <View>
+            <Pressable onPress={getCurrentPosition} style={styles.btnStyle}>
+              <Text style={styles.welcomeText}>Get Current Position</Text>
+            </Pressable>
+            <Pressable
+              style={{
+                marginTop: 20,
+                justifyContent: "center",
+                alignSelf: "center",
+              }}
+              onPress={() => navigation.navigate("AddCity")}
+            >
+              <Text style={{ fontSize: 30, textDecorationLine: "underline" }}>
+                Not Now
+              </Text>
+            </Pressable>
           </View>
         </View>
       )}
@@ -67,17 +79,23 @@ const GetStarted: React.FC<Props> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     flex: 1,
+    paddingVertical: 40,
   },
   welcomeText: {
-    fontSize: 24,
+    fontSize: 25,
     color: Colors.textColor,
+    fontWeight: "bold",
   },
   title: {
-    fontWeight: "500",
     color: Colors.textColor,
-    fontSize: 30,
+    fontSize: 20,
+  },
+  btnStyle: {
+    backgroundColor: Colors.transparentBG,
+    padding: 20,
+    borderRadius: 15,
   },
 });
 
