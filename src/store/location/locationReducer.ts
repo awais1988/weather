@@ -1,31 +1,57 @@
-import {createSlice} from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
-import {locationActions} from './locationActions';
-import {cityTypes} from '../../../types';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { locationActions } from "./locationActions";
+import { cityTypes } from "../../../types";
 
 export interface LocationState {
-  locationArray: object[];
+  locationArray: cityTypes[];
   currentLocation: cityTypes | null;
+  loading: boolean;
 }
 
 const initialState: LocationState = {
   locationArray: [],
   currentLocation: null,
+  loading: false,
 };
 
 export const locationSlice = createSlice({
-  name: 'location',
+  name: "location",
   initialState,
-  reducers: {},
-  extraReducers: builder => {
+  reducers: {
+    selectLocation: (state, action: PayloadAction<cityTypes>) => {
+      state.currentLocation = action.payload;
+    },
+    removeLocation: (state, action: PayloadAction<cityTypes>) => {
+      state.locationArray = state.locationArray.filter(
+        (item) => item.id !== action.payload.id
+      );
+      if (
+        state.currentLocation &&
+        state.currentLocation.id === action.payload.id
+      ) {
+        state.currentLocation = state.locationArray[0];
+      }
+    },
+  },
+  extraReducers: (builder) => {
     builder.addCase(locationActions.getCityData.fulfilled, (state, action) => {
-      state.locationArray.push(action.payload[0]);
-      state.currentLocation = action.payload[0];
+      state.loading = false;
+      const locValue = action?.payload[0];
+      const isExist = state.locationArray.find(
+        (item) => item.id === locValue.id
+      );
+      if (!isExist) {
+        state.locationArray.push(locValue);
+        state.currentLocation = locValue;
+      }
+    });
+    builder.addCase(locationActions.getCityData.pending, (state, action) => {
+      state.loading = true;
     });
   },
 });
 
-// Action creators are generated for each case reducer function
-export const {} = locationSlice.actions;
+export const { selectLocation, removeLocation } = locationSlice.actions;
 
 export default locationSlice.reducer;

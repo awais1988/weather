@@ -1,33 +1,32 @@
-import React, {useEffect} from 'react';
-import {View, Text, StyleSheet, Image, VirtualizedList} from 'react-native';
-import ScreenContainer from '../commonComponents/ScreenContainer';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootStackParamList} from '../appNavigator';
-import {useDispatch, useSelector} from 'react-redux';
-import {AppDispatch, RootState} from '../store';
-import Colors from '../constants/ColorConst';
-import {weatherActions} from '../store/weather/weatherActions';
-import HourBox from '../commonComponents/HourBox';
-import HomeBottomeCom from '../component/home/HomeBottomCom';
-import Spinner from '../commonComponents/Spinner';
-import useDayLabel from '../customHooks/useDayLabel';
-import ForecastItem from '../component/forecast/ForecastItem';
+import React, { useEffect } from "react";
+import { View, Text, StyleSheet } from "react-native";
+import ScreenContainer from "../commonComponents/ScreenContainer";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { RootStackParamList } from "../appNavigator";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store";
+import Colors from "../constants/ColorConst";
+import ForecastItem from "../component/forecast/ForecastItem";
 
 type ForcastScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  'Forcast'
+  "Forcast"
 >;
 
 type Props = {
   navigation: ForcastScreenNavigationProp;
 };
 
-const Forcast: React.FC<Props> = ({navigation}) => {
-  const {weatherData} = useSelector((state: RootState) => state.weather);
+const Forcast: React.FC<Props> = ({ navigation }) => {
+  const { weatherData } = useSelector((state: RootState) => state.weather);
   const forecastData = weatherData?.forecast?.forecastday || [];
 
   return (
-    <ScreenContainer headerLabel={weatherData?.location?.name}>
+    <ScreenContainer
+      headerLabel={weatherData?.location?.name}
+      backBtn={true}
+      backBtnPress={() => navigation.goBack()}
+    >
       <View style={styles.container}>
         <Text style={styles.welcomeText}>5-day forecast</Text>
         {forecastData.map((item, index) => (
@@ -43,7 +42,7 @@ const Forcast: React.FC<Props> = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: "column",
     marginTop: 20,
   },
   welcomeText: {

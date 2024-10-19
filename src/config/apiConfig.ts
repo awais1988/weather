@@ -1,4 +1,4 @@
-import { rootURL } from "./env";
+import { rootURL, geoRootURL } from "./env";
 
 interface Endpoints {
   weatherScreen: {
@@ -6,6 +6,7 @@ interface Endpoints {
   };
   locationScreen: {
     getCities: string;
+    getGeoCities: string;
   };
 }
 
@@ -15,5 +16,6 @@ export const endpoints: Endpoints = {
   },
   locationScreen: {
     getCities: `${rootURL}search.json?q=`,
+    getGeoCities: `${geoRootURL}geocode/autocomplete?text=`,
   },
 };

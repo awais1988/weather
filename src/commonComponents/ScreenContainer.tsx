@@ -12,11 +12,17 @@ import Header from "./Header";
 
 interface ScreenContainerProps {
   headerLabel?: string;
+  backBtn?: boolean;
+  backBtnPress?: any;
+  addBtn?: boolean;
   children: React.ReactNode;
 }
 
 const ScreenContainer: React.FC<ScreenContainerProps> = ({
   headerLabel,
+  backBtn,
+  backBtnPress,
+  addBtn,
   children,
 }) => {
   return (
@@ -27,7 +33,12 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
         resizeMode="cover"
       >
         <ScrollView contentContainerStyle={styles.scrollView}>
-          <Header headerLabel={headerLabel} />
+          <Header
+            headerLabel={headerLabel}
+            backBtn={backBtn}
+            backBtnPress={backBtnPress}
+            addBtn={addBtn}
+          />
           <View style={{ flex: 1 }}>{children}</View>
         </ScrollView>
       </ImageBackground>

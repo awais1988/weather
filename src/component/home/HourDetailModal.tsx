@@ -8,10 +8,12 @@ import {
   Alert,
   Modal,
   Dimensions,
+  Platform,
 } from "react-native";
 import Colors from "../../constants/ColorConst";
 import moment from "moment";
 import { ScrollView } from "react-native-gesture-handler";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const HourDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
   return (
@@ -24,6 +26,11 @@ const HourDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <ScrollView style={{ width: "100%" }}>
+            <View style={styles.crossStyle}>
+              <Pressable onPress={togglePress}>
+                <Icon name="closecircle" size={30} color="#fff" />
+              </Pressable>
+            </View>
             <View style={styles.modalRow}>
               <Text style={styles.modelHeading}>Time</Text>
               <Text style={styles.modalText}>
@@ -92,12 +99,6 @@ const HourDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
                 <Text style={styles.modalText}>{values?.chance_of_snow}</Text>
               </Text>
             </View>
-
-            {/* <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={togglePress}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
-            </Pressable> */}
           </ScrollView>
         </View>
       </View>
@@ -110,6 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop: Platform.OS === "ios" ? 25 : 0,
   },
   modalView: {
     margin: 20,
@@ -149,6 +151,11 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 50,
     height: 50,
+  },
+  crossStyle: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
 });
 

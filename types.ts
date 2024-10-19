@@ -8,7 +8,9 @@ export interface getWeatherType {
   lon: number;
   days: number;
 }
-
+export interface locCityType {
+  data: cityTypes[];
+}
 export interface cityTypes {
   id: number;
   name: string;
