@@ -1,13 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import Colors from "../../constants/ColorConst";
-import useDayLabel from "../../customHooks/useDayLabel";
-import useToggleDDM from "../../customHooks/useToggleDDM";
+import useToggleModal from "../../customHooks/useToggleModal";
 import DayDetailModal from "./DayDetailModal";
+import { utilies } from "../../utils/utilities";
 
 const ForecastItem: React.FC<any> = ({ values }) => {
-  const { getDayLabel } = useDayLabel();
-  const { togglePress, isVisible } = useToggleDDM();
+  const { togglePress, isVisible } = useToggleModal();
   return (
     <>
       <Pressable onPress={togglePress}>
@@ -17,7 +16,9 @@ const ForecastItem: React.FC<any> = ({ values }) => {
               style={styles.tinyLogo}
               source={{ uri: `https:${values?.day?.condition.icon}` }}
             />
-            <Text style={styles.dayText}>{getDayLabel(values?.date)}</Text>
+            <Text style={styles.dayText}>
+              {utilies.getDayLabel(values?.date)}
+            </Text>
             <Text style={styles.temText}>{values?.day?.maxtemp_c}</Text>
             <Text style={styles.temText}>{values?.day?.mintemp_c}</Text>
           </View>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, Alert } from "react-native";
 import ScreenContainer from "../commonComponents/ScreenContainer";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../appNavigator";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import Colors from "../constants/ColorConst";
@@ -15,11 +15,9 @@ import {
 import { cityTypes } from "../../types";
 import Icon from "react-native-vector-icons/AntDesign";
 import useResetStack from "../customHooks/useResetStack";
+import { ParamListBase } from "@react-navigation/native";
 
-type CitiesScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "Cities"
->;
+type CitiesScreenNavigationProp = StackNavigationProp<ParamListBase, "Cities">;
 
 type Props = {
   navigation: CitiesScreenNavigationProp;
@@ -56,14 +54,8 @@ const Cities: React.FC<Props> = ({ navigation }) => {
         <View style={styles.citiesWrapper}>
           {locationArray.map((item, index) => {
             return (
-              <View
-                key={index}
-                style={{
-                  flexDirection:
-                    locationArray?.length > 1 && deleteMood ? "row" : "column",
-                }}
-              >
-                {locationArray?.length > 1 && deleteMood && (
+              <View key={index} style={styles.itemWrapper}>
+                {locationArray.length > 1 && deleteMood && (
                   <Pressable onPress={() => onDeleteItem(item)}>
                     <Icon name="delete" size={30} color="#ff0000" />
                   </Pressable>
@@ -96,15 +88,21 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     marginTop: 10,
   },
+  itemWrapper: {
+    flexDirection: "row",
+    backgroundColor: Colors.greenColor,
+    alignItems: "center",
+    borderRadius: 20,
+    marginTop: 10,
+  },
   cityBox: {
     flexDirection: "column",
     height: 100,
-    backgroundColor: Colors.greenColor,
     borderRadius: 20,
+    flex: 1,
     padding: 20,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 10,
   },
   welcomeText: {
     fontSize: 25,
@@ -131,4 +129,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cities;
+export { Cities };

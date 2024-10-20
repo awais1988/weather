@@ -8,7 +8,6 @@ import {
   TextInput,
   View,
 } from "react-native";
-import { RootStackParamList } from "../appNavigator";
 import Header from "../commonComponents/Header";
 import Colors from "../constants/ColorConst";
 import { debounce } from "lodash";
@@ -18,9 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import { locationActions } from "../store/location/locationActions";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { ParamListBase } from "@react-navigation/native";
 
 type AddCityScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  ParamListBase,
   "AddCity"
 >;
 
@@ -156,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddCity;
+export { AddCity };

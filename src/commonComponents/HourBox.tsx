@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, Image, Pressable, Alert } from "react-native";
 import Colors from "../constants/ColorConst";
 import moment from "moment";
 import HourDetailModal from "../component/home/HourDetailModal";
-import useToggleHDM from "../customHooks/useToggleHDM";
+import useToggleModal from "../customHooks/useToggleModal";
 
 const HourBox: React.FC<any> = ({ values }) => {
-  const { togglePress, isVisible } = useToggleHDM();
+  const { togglePress, isVisible } = useToggleModal();
 
   return (
     <>

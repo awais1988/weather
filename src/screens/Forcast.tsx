@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import ScreenContainer from "../commonComponents/ScreenContainer";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../appNavigator";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import Colors from "../constants/ColorConst";
 import ForecastItem from "../component/forecast/ForecastItem";
+import { ParamListBase } from "@react-navigation/native";
 
 type ForcastScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  ParamListBase,
   "Forcast"
 >;
 
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Forcast;
+export { Forcast };

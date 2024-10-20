@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Image, FlatList } from "react-native";
 import ScreenContainer from "../commonComponents/ScreenContainer";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../appNavigator";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import Colors from "../constants/ColorConst";
@@ -10,8 +9,9 @@ import { weatherActions } from "../store/weather/weatherActions";
 import HourBox from "../commonComponents/HourBox";
 import HomeBottomeCom from "../component/home/HomeBottomCom";
 import Spinner from "../commonComponents/Spinner";
+import { ParamListBase } from "@react-navigation/native";
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
+type HomeScreenNavigationProp = StackNavigationProp<ParamListBase, "Home">;
 
 type Props = {
   navigation: HomeScreenNavigationProp;
@@ -116,4 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export { Home };

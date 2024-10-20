@@ -1,22 +1,11 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Home from "../screens/Home";
-import GetStarted from "../screens/GetStarted";
-import Forcast from "../screens/Forcast";
-import Cities from "../screens/Cities";
-import AddCity from "../screens/AddCity";
+import { Home, GetStarted, Forcast, Cities, AddCity } from "../screens/index";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { ParamListBase } from "@react-navigation/native";
 
-export type RootStackParamList = {
-  Home: undefined;
-  GetStarted: undefined;
-  Forcast: undefined;
-  Cities: undefined;
-  AddCity: undefined;
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
+const Stack = createStackNavigator<ParamListBase>();
 
 const AppNavigator: React.FC = () => {
   const { locationArray } = useSelector((state: RootState) => state.location);

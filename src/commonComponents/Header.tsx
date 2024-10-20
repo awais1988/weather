@@ -2,11 +2,10 @@ import React from "react";
 import { View, StyleSheet, Pressable, Text, Platform } from "react-native";
 import Colors from "../constants/ColorConst";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+import { ParamListBase, useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../appNavigator";
 
-type ScreenNavigationProp = StackNavigationProp<RootStackParamList>;
+type ScreenNavigationProp = StackNavigationProp<ParamListBase>;
 
 type Props = {
   headerLabel?: string;

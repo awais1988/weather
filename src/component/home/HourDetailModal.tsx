@@ -14,6 +14,7 @@ import Colors from "../../constants/ColorConst";
 import moment from "moment";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/AntDesign";
+import DisplayRow from "../../commonComponents/DisplayRow";
 
 const HourDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
   return (
@@ -31,12 +32,10 @@ const HourDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
                 <Icon name="closecircle" size={30} color="#fff" />
               </Pressable>
             </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Time</Text>
-              <Text style={styles.modalText}>
-                {moment(values?.time).format("hh:mm A")}
-              </Text>
-            </View>
+            <DisplayRow
+              rowLable="Time"
+              rowvalues={moment(values?.time).format("hh:mm A")}
+            />
             <View style={styles.modalRow}>
               <Text style={styles.modelHeading}>Condition</Text>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -47,58 +46,24 @@ const HourDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
                 <Text style={styles.modalText}>{values?.condition.text}</Text>
               </View>
             </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Wind/KM</Text>
-              <Text style={styles.modalText}>{values?.wind_kph}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Atmospheric/Inch</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.pressure_in}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Cloud</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.cloud}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Temp</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.temp_c}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Feels Like</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.feelslike_c}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Heat Index</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.heatindex_c}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Dewpoint</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.dewpoint_c}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Rain Chance</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.chance_of_rain}</Text>
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Snow Chance</Text>
-              <Text style={styles.modalText}>
-                <Text style={styles.modalText}>{values?.chance_of_snow}</Text>
-              </Text>
-            </View>
+            <DisplayRow rowLable="Wind/KM" rowvalues={values?.wind_kph} />
+            <DisplayRow
+              rowLable="Atmospheric/Inch"
+              rowvalues={values?.pressure_in}
+            />
+            <DisplayRow rowLable="Cloud" rowvalues={values?.cloud} />
+            <DisplayRow rowLable="Temp" rowvalues={values?.temp_c} />
+            <DisplayRow rowLable="Feels Like" rowvalues={values?.feelslike_c} />
+            <DisplayRow rowLable="Heat Index" rowvalues={values?.heatindex_c} />
+            <DisplayRow rowLable="Dewpoint" rowvalues={values?.dewpoint_c} />
+            <DisplayRow
+              rowLable="Rain Chance"
+              rowvalues={values?.chance_of_rain}
+            />
+            <DisplayRow
+              rowLable="Snow Chance"
+              rowvalues={values?.chance_of_snow}
+            />
           </ScrollView>
         </View>
       </View>

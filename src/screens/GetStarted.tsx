@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Button, StyleSheet, Alert, Pressable } from "react-native";
 import ScreenContainer from "../commonComponents/ScreenContainer";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../appNavigator";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import { locationActions } from "../store/location/locationActions";
 import useGeoLocation from "../customHooks/useGeoLocation";
 import Colors from "../constants/ColorConst";
 import Spinner from "../commonComponents/Spinner";
+import { ParamListBase } from "@react-navigation/native";
 
 type GetStartedNavigationProp = StackNavigationProp<
-  RootStackParamList,
+  ParamListBase,
   "GetStarted"
 >;
 
@@ -99,4 +100,4 @@ const styles = StyleSheet.create({
   txtNotNow: { fontSize: 30, textDecorationLine: "underline" },
 });
 
-export default GetStarted;
+export { GetStarted };

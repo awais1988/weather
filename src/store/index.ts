@@ -1,17 +1,7 @@
-// import {applyMiddleware, createStore} from 'redux';
-// import combinedReducer from './combineReducer';
-// import {thunk} from 'redux-thunk';
-
-// const Store = createStore(combinedReducer, applyMiddleware(thunk));
-
-// export default Store;
-// export type RootState = ReturnType<typeof combinedReducer>;
-// export type AppDispatch = typeof Store.dispatch;
-
-import {configureStore} from '@reduxjs/toolkit';
-import weatherReducer from './weather/weatherReducer';
-import locationReducer from './location/locationReducer';
-import Storage from '@react-native-async-storage/async-storage';
+import { configureStore } from "@reduxjs/toolkit";
+import weatherReducer from "./weather/weatherReducer";
+import locationReducer from "./location/locationReducer";
+import Storage from "@react-native-async-storage/async-storage";
 import {
   persistStore,
   persistReducer,
@@ -21,7 +11,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
+} from "redux-persist";
 
 export interface PersistConfig {
   key: string;
@@ -30,7 +20,7 @@ export interface PersistConfig {
 }
 
 const persistConfig: PersistConfig = {
-  key: 'root',
+  key: "root",
   storage: Storage,
   version: 1,
 };
@@ -42,7 +32,7 @@ export const store = configureStore({
     weather: weatherReducer,
     location: persistedReducer,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

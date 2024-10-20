@@ -1,23 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   StyleSheet,
   Image,
   Pressable,
-  Alert,
   Modal,
   Dimensions,
   Platform,
 } from "react-native";
 import Colors from "../../constants/ColorConst";
-import moment from "moment";
 import { ScrollView } from "react-native-gesture-handler";
-import useDayLabel from "../../customHooks/useDayLabel";
 import Icon from "react-native-vector-icons/AntDesign";
+import { utilies } from "../../utils/utilities";
+import DisplayRow from "../../commonComponents/DisplayRow";
 
 const DayDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
-  const { getDayLabel } = useDayLabel();
   return (
     <Modal
       animationType="slide"
@@ -33,10 +31,10 @@ const DayDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
                 <Icon name="closecircle" size={30} color="#fff" />
               </Pressable>
             </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Day</Text>
-              <Text style={styles.modalText}>{getDayLabel(values?.date)}</Text>
-            </View>
+            <DisplayRow
+              rowLable="Day"
+              rowvalues={utilies.getDayLabel(values?.date)}
+            />
             <View style={styles.modalRow}>
               <Text style={styles.modelHeading}>Condition</Text>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -49,46 +47,33 @@ const DayDetailModal: React.FC<any> = ({ values, isVisible, togglePress }) => {
                 </Text>
               </View>
             </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Max Temp</Text>
-              <Text style={styles.modalText}>{values?.day?.maxtemp_c}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Min Temp</Text>
-              <Text style={styles.modalText}>{values?.day?.mintemp_c}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Rain Chance</Text>
-              <Text style={styles.modalText}>
-                {values?.day?.daily_chance_of_rain}
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Snow Chance</Text>
-              <Text style={styles.modalText}>
-                {values?.day?.daily_chance_of_snow}
-              </Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Wind - km/h</Text>
-              <Text style={styles.modalText}>{values?.day?.maxwind_kph}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Sunrise</Text>
-              <Text style={styles.modalText}>{values?.astro?.sunrise}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Sunset</Text>
-              <Text style={styles.modalText}>{values?.astro?.sunset}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Moonrise</Text>
-              <Text style={styles.modalText}>{values?.astro?.moonrise}</Text>
-            </View>
-            <View style={styles.modalRow}>
-              <Text style={styles.modelHeading}>Moonset</Text>
-              <Text style={styles.modalText}>{values?.astro?.moonset}</Text>
-            </View>
+            <DisplayRow
+              rowLable="Max Temp"
+              rowvalues={values?.day?.maxtemp_c}
+            />
+            <DisplayRow
+              rowLable="Min Temp"
+              rowvalues={values?.day?.mintemp_c}
+            />
+            <DisplayRow
+              rowLable="Rain Chance"
+              rowvalues={values?.day?.daily_chance_of_rain}
+            />
+            <DisplayRow
+              rowLable="Snow Chance"
+              rowvalues={values?.day?.daily_chance_of_snow}
+            />
+            <DisplayRow
+              rowLable="Wind - km/h"
+              rowvalues={values?.day?.maxwind_kph}
+            />
+            <DisplayRow rowLable="Sunrise" rowvalues={values?.astro?.sunrise} />
+            <DisplayRow rowLable="Sunset" rowvalues={values?.astro?.sunset} />
+            <DisplayRow
+              rowLable="Moonrise"
+              rowvalues={values?.astro?.moonrise}
+            />
+            <DisplayRow rowLable="Moonset" rowvalues={values?.astro?.moonset} />
           </ScrollView>
         </View>
       </View>
