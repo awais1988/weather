@@ -58,16 +58,10 @@ const GetStarted: React.FC<Props> = ({ navigation }) => {
               <Text style={styles.welcomeText}>Get Current Position</Text>
             </Pressable>
             <Pressable
-              style={{
-                marginTop: 20,
-                justifyContent: "center",
-                alignSelf: "center",
-              }}
+              style={styles.btnNotNow}
               onPress={() => navigation.navigate("AddCity")}
             >
-              <Text style={{ fontSize: 30, textDecorationLine: "underline" }}>
-                Not Now
-              </Text>
+              <Text style={styles.txtNotNow}>Not Now</Text>
             </Pressable>
           </View>
         </View>
@@ -97,6 +91,12 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 15,
   },
+  btnNotNow: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignSelf: "center",
+  },
+  txtNotNow: { fontSize: 30, textDecorationLine: "underline" },
 });
 
 export default GetStarted;
