@@ -64,3 +64,41 @@ yarn ios
 ```
 
 If everything is set up _correctly_, you will see app running in your _Android Emulator_ or _iOS Simulator_ .
+
+## Project Structure:
+
+### On Root
+
+We have:
+
+```bash
+index.js
+App.tsx
+types.ts (To define types)
+And other react-native generated files and folders, that we use in our project.
+```
+
+### On src Folder we have:
+
+```bash
+appNavigator (In it handling app navigation)
+
+assests (In it images are added that will be used in application)
+
+commonComponents (It contains all common components that are using on different screens and components)
+
+component (It contains folders regarding the screens and in folders there are componnet that are using on that screen. Not a common component.)
+
+config (It contains interceptor, endpoints and envoirnment urls)
+
+constants (It contains the constant file like: colors, text that we will use on application)
+
+customHooks (It contains custom hooks that we are using in app)
+
+screens (It contains main screens, on which we navigate)
+
+store (It contains reducers, actions and store)
+
+utils (It contains function that returns some value and also api call file)
+
+```
